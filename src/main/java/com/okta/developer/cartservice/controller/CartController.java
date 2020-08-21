@@ -1,7 +1,9 @@
 package com.okta.developer.cartservice.controller;
 
+import com.netflix.discovery.converters.Auto;
 import com.okta.developer.cartservice.model.Cart;
 import com.okta.developer.cartservice.repository.CartRepository;
+import com.okta.developer.cartservice.service.PricingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,10 @@ public class CartController {
 
     @Autowired
     private CartRepository repository;
+
+    @Autowired
+    private PricingService pricingService;
+
 
     @GetMapping("/cart/{id}")
     public Cart getCart(@PathVariable Integer id){
@@ -20,7 +26,8 @@ public class CartController {
 
     @PostMapping("/cart")
     public Cart saveCart(@RequestBody Cart cart){
-        Cart saved = repository.save(cart);
+        Cart priced = pricingService.price(cart);
+        Cart saved = repository.save(priced);
         return saved;
     }
 
