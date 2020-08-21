@@ -15,6 +15,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
+
+    //For service discovery, a ReactorLoadBalancerExchangeFilterFunction must be added to the WebClient
     @Autowired
     private ReactorLoadBalancerExchangeFilterFunction lbFunction;
 
