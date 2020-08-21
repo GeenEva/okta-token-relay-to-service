@@ -5,8 +5,6 @@ import com.okta.developer.cartservice.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class CartController {
 
@@ -22,8 +20,8 @@ public class CartController {
 
     @PostMapping("/cart")
     public Cart saveCart(@RequestBody Cart cart){
-
-        return repository.save(cart);
+        Cart saved = repository.save(cart);
+        return saved;
     }
 
 }
